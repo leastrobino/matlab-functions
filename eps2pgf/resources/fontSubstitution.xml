@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment></comment>
+  <entry key="ArialMT">Helvetica</entry>
+  <entry key="CenturySchL-Roma">NewCenturySchlbk-Roman</entry>
+  <entry key="CenturySchL-Bold">NewCenturySchlbk-Bold</entry>
+  <entry key="CenturySchL-Ital">NewCenturySchlbk-Italic</entry>
+  <entry key="CenturySchL-BoldItal">NewCenturySchlbk-BoldItalic</entry>
+  <entry key="/Century Schoolbook">NewCenturySchlbk-Roman</entry>
+  <entry key="/Century Schoolbook-Bold">NewCenturySchlbk-Bold</entry>
+  <entry key="/Century Schoolbook-Italic">NewCenturySchlbk-Italic</entry>
+  <entry key="/Century Schoolbook-BoldItalic">NewCenturySchlbk-BoldItalic</entry>
+</properties>
