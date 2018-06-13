@@ -2,7 +2,7 @@
 %  MeteoSwiss.m
 %
 %  Created by Léa Strobino.
-%  Copyright 2017 hepia. All rights reserved.
+%  Copyright 2018 hepia. All rights reserved.
 %
 
 classdef MeteoSwiss < handle
@@ -203,7 +203,7 @@ classdef MeteoSwiss < handle
     
     function m = getJSON(this,measurement,file)
       measurement = [measurement '/' this.version.(strrep(measurement,'-','_'))];
-      s = this.urlread(['/product/output/measured-values-v2/' measurement '/en/' file '.json']);
+      s = this.urlread(['/product/output/measured-values/' measurement '/en/' file '.json']);
       m = json_decode(s);
     end
     
