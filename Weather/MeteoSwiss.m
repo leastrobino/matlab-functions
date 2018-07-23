@@ -8,7 +8,7 @@
 classdef MeteoSwiss < handle
   
   properties (Constant)
-    server = 'http://www.meteoswiss.admin.ch';
+    server = 'https://www.meteoswiss.admin.ch';
   end
   
   properties (SetAccess = private)
@@ -22,11 +22,11 @@ classdef MeteoSwiss < handle
   methods
     
     function this = MeteoSwiss()
-      [this.stations,this.version] = this.getStations();
+      this.getStations();
     end
     
     function refresh(this)
-      [this.stations,this.version] = this.getStations(0);
+      this.getStations(0);
     end
     
     function o = getFoehn(this,station)
@@ -129,7 +129,7 @@ classdef MeteoSwiss < handle
   
   methods (Access = private)
     
-    function [s,v] = getStations(this,~)
+    function getStations(this,~)
       persistent stations version
       mlock();
       if isempty(stations) || nargin > 1
@@ -151,8 +151,8 @@ classdef MeteoSwiss < handle
         [~,i] = sort(fieldnames(stations));
         stations = orderfields(stations,i);
       end
-      s = stations;
-      v = version;
+      this.stations = stations;
+      this.version = version;
     end
     
     function o = getMeasurement(this,measurement,station)
