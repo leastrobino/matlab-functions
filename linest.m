@@ -20,7 +20,7 @@ function [c,S_c,R2,Q2,h] = linest(x,y,xvar,xunit,yvar,yunit,varargin)
 %   Q2 = sum ( (YDATA-C(1)*XDATA-C(2)) / S_YDATA ) ^ 2
 
 % Created by Léa Strobino.
-% Copyright 2016 hepia. All rights reserved.
+% Copyright 2018 hepia. All rights reserved.
 
 degree = 1;
 if nargin > 2 && isnumeric(xvar)
@@ -63,13 +63,12 @@ end
 X = bsxfun(@power,x,degree:-1:0);
 W = diag(S_y.^-2);
 c = (X'*W*X)\X'*W*y;
-p = n-length(c);
-t = tinv(.975,p);
+v = n-numel(c);
+t = tinv(.975,v);
 r = y-X*c;
 Q2 = sum((abs(r)./abs(S_y)).^2);
-[~,R] = qr(bsxfun(@times,1./S_y,X),0);
-Ri = inv(R);
-cov = (Ri*Ri')*Q2/p;
+J = bsxfun(@times,1./S_y,X);
+cov = inv(J'*J)*Q2/v; %#ok<MINV>
 S_c = t*sqrt(diag(cov));
 R2 = 1-sum(abs(r).^2)/sum(abs(y-mean(y)).^2);
 

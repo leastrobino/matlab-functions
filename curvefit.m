@@ -37,7 +37,7 @@ function [c,S_c,out,h] = curvefit(x,y,f,c_0,varargin)
 %See also LSQNONLIN, FMINSEARCH, TINV, PLOT, ERRORBAR.
 
 % Created by Léa Strobino.
-% Copyright 2016 hepia. All rights reserved.
+% Copyright 2018 hepia. All rights reserved.
 
 persistent optim
 if isempty(optim)
@@ -144,10 +144,8 @@ c = c.';
 v = n-numel(c);
 t = tinv(.975,v);
 y_fit = feval(f,c,x);
-J = jacobian(f,c,x,y_fit);
-[~,R] = qr(bsxfun(@times,1./S_y,J),0);
-Ri = inv(R);
-cov = (Ri*Ri')*Q2/v;
+J = bsxfun(@times,1./S_y,jacobian(f,c,x,y_fit));
+cov = inv(J'*J)*Q2/v; %#ok<MINV>
 S_c = t*sqrt(diag(cov));
 r = y-y_fit;
 R2 = 1-sum(abs(r).^2)/sum(abs(y-mean(y)).^2);
